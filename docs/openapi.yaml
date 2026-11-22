@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: keygate API
+  version: 0.1.0
+servers:
+  - url: http://127.0.0.1:8080
+paths:
+  /healthz:
+    get:
+      summary: Проверка сервиса
+      responses:
+        "200":
+          description: OK
+  /v1/keys/resolve:
+    post:
+      summary: Выдать временный lease на ключ
+      security:
+        - MasterKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provider, scope, ttl]
+              properties:
+                provider: { type: string, example: telegram }
+                scope: { type: string, example: send }
+                ttl: { type: integer, example: 60 }
+      responses:
+        "200": { description: Lease выдан }
+        "403": { description: Отклонено политикой }
+  /v1/keys/rotate:
+    post:
+      summary: Ротировать ключ провайдера
+      security:
+        - MasterKey: []
+      responses:
+        "200": { description: Ключ ротирован }
+  /v1/audit:
+    get:
+      summary: Лог событий
+      security:
+        - MasterKey: []
+      responses:
+        "200": { description: События }
+  /v1/providers:
+    get:
+      summary: Список провайдеров
+      security:
+        - MasterKey: []
+      responses:
+        "200": { description: Провайдеры }
+components:
+  securitySchemes:
+    MasterKey:
+      type: apiKey
+      in: header
+      name: X-KeyGate-Key
