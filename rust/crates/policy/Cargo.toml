@@ -1,0 +1,12 @@
+[package]
+name = "keygate-policy"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Policy engine для keygate (C ABI)"
+
+[lib]
+name = "keygate_policy"
+crate-type = ["cdylib", "rlib"]
+path = "src/lib.rs"
