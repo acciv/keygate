@@ -1,0 +1,10 @@
+# GitHub Linguist overrides for repository language statistics.
+*.go   linguist-language=Go
+*.rs   linguist-language=Rust
+*.py   linguist-language=Python
+*.cpp  linguist-language=C++
+*.hpp  linguist-language=C++
+*.h    linguist-language=C
+*.java linguist-language=Java
+*.php  linguist-language=PHP
+Makefile linguist-language=Makefile
